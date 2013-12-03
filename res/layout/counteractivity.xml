@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ff0000" >
+
+	<TextView
+	    android:id="@+id/textview"
+	    android:layout_width="wrap_content"
+	    android:layout_height="50dp" />
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="#00ff00"> 
+
+	    <GridLayout 
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:columnCount="3"
+	        android:orientation="horizontal"
+	        android:background="#0000ff">
+	        <Button android:text="1"
+	            	android:id="@+id/button1"/>
+	        <Button android:text="2"
+	            	android:id="@+id/button2"/>
+	        <Button android:text="3"
+	            	android:id="@+id/button3"/>
+	        <Button android:text="4"
+	            	android:id="@+id/button4"/>
+	        <Button android:text="5"
+	            	android:id="@+id/button5"/>
+	        <Button android:text="6"
+	            	android:id="@+id/button6"/>
+	        <Button android:text="7"
+	            	android:id="@+id/button7"/>
+	        <Button android:text="8"
+	            	android:id="@+id/button8"/>
+	        <Button android:text="9"
+	            	android:id="@+id/button9"/>
+	        <Button android:text="CE"
+	            	android:id="@+id/canle"/>"
+	        <Button android:text="0"
+	            	android:layout_columnSpan="2"
+	            	android:layout_gravity="fill_horizontal"
+	            	android:id="@+id/button0"/>"
+	        
+	    </GridLayout>
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:orientation="vertical" >
+	        
+	        <Button    
+	        	android:id="@+id/add"
+	        	android:layout_width="match_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="+"/>
+	        
+	        <Button    
+	        	android:id="@+id/minus"
+	        	android:layout_width="match_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="-"/>
+	        
+	        <Button    
+	        	android:id="@+id/times"
+	        	android:layout_width="match_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="*"/>
+	        
+	        <Button    
+	        	android:id="@+id/divided"
+	        	android:layout_width="match_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="/"/>
+	        
+	        <Button
+	            android:id="@+id/result"
+	        	android:layout_width="match_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="=" />"
+	        
+	    </LinearLayout>
+	
+	</LinearLayout>
+
+</LinearLayout>

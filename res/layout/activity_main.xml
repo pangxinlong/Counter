@@ -8,7 +8,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:text="这是一个计算器 	点击屏幕继续" 
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/buttonin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="进入" />
 
 </RelativeLayout>
