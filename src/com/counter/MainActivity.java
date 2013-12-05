@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 		
 		buttonin=(Button) findViewById(R.id.buttonin);
 		buttonin.setOnClickListener(l);
-		Log.e("dd","1£¡£¡£¡£¡");
+		//Log.e("dd","1£¡£¡£¡£¡");
 
 	}
 	
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 				if(arg0.equals(buttonin)){
 					Intent intent=new Intent(MainActivity.this,CounterActivity.class);
 					MainActivity.this.startActivity(intent);
-					Log.e("dd","2!!!!!!!!!");
+			//		Log.e("dd","2!!!!!!!!!");
 
 				}
 			}

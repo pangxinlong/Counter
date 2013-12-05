@@ -8,7 +8,12 @@
 	<TextView
 	    android:id="@+id/textview"
 	    android:layout_width="wrap_content"
-	    android:layout_height="50dp" />
+	    android:layout_height="25dp" />
+	<TextView 
+	    android:id="@+id/show"
+	    android:layout_width="match_parent"
+	    android:layout_height="25dp"
+	    android:background="#ffff00"/>"
 
 	<LinearLayout
 	    android:layout_width="match_parent"
@@ -40,7 +45,7 @@
 	        <Button android:text="9"
 	            	android:id="@+id/button9"/>
 	        <Button android:text="CE"
-	            	android:id="@+id/canle"/>"
+	            	android:id="@+id/clean"/>"
 	        <Button android:text="0"
 	            	android:layout_columnSpan="2"
 	            	android:layout_gravity="fill_horizontal"
