@@ -1,7 +1,11 @@
 package com.counter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.Contacts.Intents.Insert;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,20 +14,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class CounterActivity extends Activity implements OnClickListener {
-	public TextView tv,show;
+	public TextView tv;
 	public Button button1,button2,button3,button4,button5,
 				  button6,button7,button8,button9,button0,
 				  buttonadd,buttonminus,buttontimes,buttondivided,buttonresult,buttonclean;
-	public String s="";//´æ·ÅÊäÈëÊı×Ö
-	public String clu="";//´æ·ÅÔËËã·û
-	double sum1=0,sum2=0;
-	boolean firstclu=true;//ÅĞ¶ÏÊÇ·ñÊÇµÚÒ»´ÎÊäÈëÔËËã·û
+	public static List<String> array= new ArrayList<String>();
+	String data1,data2,operator=null;
+	ArrayList myarraylist=new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.counteractivity);
-		//°ó¶¨¸ö¸ö°´Å¥
+		//ç»‘å®šä¸ªä¸ªæŒ‰é’®
 		button1=(Button) findViewById(R.id.button1);
 		button2=(Button) findViewById(R.id.button2);
 		button3=(Button) findViewById(R.id.button3);
@@ -41,9 +44,8 @@ public class CounterActivity extends Activity implements OnClickListener {
 		buttondivided=(Button) findViewById(R.id.divided);
 		buttonresult=(Button) findViewById(R.id.result);
 		tv=(TextView) findViewById(R.id.textview);
-		show=(TextView) findViewById(R.id.show);
 		
-		//¼àÌı¸÷¸÷°´Å¥
+		//ç›‘å¬å„å„æŒ‰é’®
 		button0.setOnClickListener(this);
 		button1.setOnClickListener(this);
 		button2.setOnClickListener(this);
@@ -61,184 +63,100 @@ public class CounterActivity extends Activity implements OnClickListener {
 		buttondivided.setOnClickListener(this);
 		buttonresult.setOnClickListener(this);
 		tv.setOnClickListener(this);
-		show.setOnClickListener(this);
 		
 	}
-		//°´Å¥ÊÂ¼ş
+		//æŒ‰é’®äº‹ä»¶
 		@Override
 		public void onClick(View v) {
-			// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-			if(v.equals(button0)){
-				s=s+"0";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button1)){
-				s=s+"1";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button2)){
-				s=s+"2";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button3)){
-				s=s+"3";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button4)){
-				s=s+"4";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button5)){
-				s=s+"5";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button6)){
-				s=s+"6";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button7)){
-				s=s+"7";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button8)){
-				s=s+"8";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(button9)){
-				s=s+"9";
-				tv.setText(s);
-				tv.getText().toString();
-			}
-			else if(v.equals(buttonadd)){//¼Ó·¨
-				if(firstclu){
-				clu="+";
-				show.setText(clu);
-				show.getText().toString();
-				sum1=Double.parseDouble(s);
-				s="";
-				firstclu=false;
-
-				}
-				else{
-					operation();
-					Log.e("!!!", "!!!");
-					clu="+";
-					show.setText(clu);
-					show.getText().toString();
-				}
-			}
-			else if(v.equals(buttonminus)){//¼õ·¨
-				if(firstclu){
-					clu="-";
-					show.setText(clu);
-					show.getText().toString();
-					sum1=Double.parseDouble(s);
-					s="";
-					firstclu=false;
-				}
-				else
-				{
-					operation();
-					clu="-";
-					show.setText(clu);
-					show.getText().toString();
-				}	
+			String data="";
+			switch(v.getId()){
+				case R.id.button0:{
+					myarraylist.add("0");
+					show();
+				}break;
 				
+				case R.id.button1:{
+					myarraylist.add("1");
+					show();
+					}
+				break;
+				
+				case R.id.button2:{
+					myarraylist.add("2");
+					show();
+				}break;
+				
+				case R.id.button3:{
+					myarraylist.add("3");
+					show();
+				}break;
+				
+				case R.id.button4:{
+					myarraylist.add("4");
+					show();
+				}break;
+				
+				case R.id.button5:{
+					myarraylist.add("5");
+					show();
+				}break;
+				
+				case R.id.button6:{
+					myarraylist.add("6");
+					show();
+				}break;
+				
+				case R.id.button7:{
+					myarraylist.add("7");
+					show();
+				}break;
+				
+				case R.id.button8:{
+					myarraylist.add("8");
+					show();
+				}break;
+				
+				case R.id.button9:{
+					myarraylist.add("9");
+					show();
+				}break;
+				
+				case R.id.add:{
+					myarraylist.add("+");
+					show();
+				}break;
+				
+				case R.id.minus:{
+					myarraylist.add("-");
+					show();
+				}break;
+				
+				case R.id.times:{
+					myarraylist.add("*");
+					show();
+				}break;
+				
+				case R.id.divided:{
+					myarraylist.add("/");
+					show();
+				}break;
+				
+				case R.id.result:{
+					myarraylist.add("=");
+					show();
+				}break;
+
 			}
-			else if(v.equals(buttontimes)){//³Ë·¨
-				if(firstclu){
-				clu="*";
-				show.setText(clu);
-				show.getText().toString();
-				sum1=Double.parseDouble(s);
-				s="";
-				firstclu=false;
-				}
-				else
-				{					
-					operation();
-					clu="*";
-					show.setText(clu);
-					show.getText().toString();
-				}
-			}
-			else if(v.equals(buttondivided)){//³ı·¨
-				if(firstclu){
-				clu="/";
-				show.setText(clu);
-				show.getText().toString();
-				sum1+=Double.parseDouble(s);
-				s="";
-				firstclu=false;
-				}
-				else
-				{
-					operation();
-					clu="/";
-					show.setText(clu);
-					show.getText().toString();
-				}
-			}
-			else if(v.equals(buttonresult))
-			{//°´ÏÂµÈÓÚºÅÊÂ¼ş
-				operation();
-				s=String.valueOf(sum1);
-				firstclu=true;
-				clu="";//´æ·ÅÔËËã·û
-				sum2=0;
-			
-			
-			}
-			else
-			{
-				s="";//´æ·ÅÊäÈëÊı×Ö
-				clu="";//´æ·ÅÔËËã·û
-				sum1=0;
-				sum2=0;
-				firstclu=true;
-				tv.setText("0");
-				tv.getText().toString();
-			}
+		
 		}
-		public void operation(){
-			sum2=Double.parseDouble(s);//µÚ¶ş´ÎµÄÊäÈë´æµ½sum2
-			if(clu=="+"){
-				tv.setText((sum1+sum2)+"");
-				tv.getText();
-				sum1+=sum2;
-			}
-			else if(clu=="-"){
-				tv.setText((sum1-sum2)+"");
-				tv.getText();
-				sum1-=sum2;
-			}
-			else if(clu=="*"){
-				tv.setText((sum1*sum2)+"");
-				tv.getText();
-				sum1*=sum2;
-			}
-			else {
-				if(sum2!=0){
-				tv.setText((sum1/sum2)+"");
-				tv.getText();
-				sum1/=sum2;
-				}
-				else
-				{
-					tv.setText("error");
-					tv.getText();
-				}
-			}
-			s="";
+		
+		public void show(){
+			String resultStr="";
+			for(int i=0;i<myarraylist.size();i++){
+				resultStr+=(String) myarraylist.get(i);
+				}	
+			tv.setText(resultStr);
+			tv.getText().toString();
 		}
 }
 
