@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class CounterActivity extends Activity implements OnClickListener {
-	public TextView showView;
 	ArrayList myarraylist = new ArrayList<String>();
 	private static final int TYPE_OPERATOR = -1;// 符号
 	private static final int TYPE_EMPTY = 0;// 空
@@ -41,30 +40,13 @@ public class CounterActivity extends Activity implements OnClickListener {
 	// 按钮事件
 	@Override
 	public void onClick(View v) {
-		if ((((Button) v).getText()).equals("=")) {
+		if (v.getId()==R.id.result) {
 			// voluation(myarraylist);
-			show();
 		} else {
-			char buttonChar;// 存放监听到的按键字符串
-			buttonChar = ((Button) v).getText().charAt(0);
-			if (judgeCharOrNumber(((Button) v).getText().charAt(0))) {
-				switch (judgeCharList(myarraylist)) {
-				case TYPE_EMPTY:
-					;
-					break;
-				case TYPE_OPERATOR:
-					myarraylist.set(myarraylist.size() - 1,
-							((Button) v).getText());
-					break;
-				case TYPE_NUMBER:
-					myarraylist.add(((Button) v).getText());
-					break;
-				}
-			} else {
-				myarraylist.add((String) ((Button) v).getText());
-			}
-			show();
+			String buttonString = (String) ((Button) v).getText();// 存放监听到的按键字符串
+			judgeInput(buttonString);
 		}
+		show();
 	}
 
 	public void show() {// 用来显示输入的内容
@@ -96,6 +78,23 @@ public class CounterActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	public void judgeInput(String StringOperator) {// 通过judgeCharOrNumber，judgeCharList判断后确定输入形式
+		if (judgeCharOrNumber(StringOperator.charAt(0))) {
+			switch (judgeCharList(myarraylist)) {
+			case TYPE_EMPTY:
+				;
+				break;
+			case TYPE_OPERATOR:
+				myarraylist.set(myarraylist.size() - 1, StringOperator);
+				break;
+			case TYPE_NUMBER:
+				myarraylist.add(StringOperator);
+				break;
+			}
+		} else {
+			myarraylist.add((String) (StringOperator));
+		}
+	}
 	/*
 	 * public void voluation(ArrayList<String> cacheList) {
 	 * 
