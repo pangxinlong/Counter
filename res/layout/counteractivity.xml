@@ -41,11 +41,11 @@
 	        <Button android:text="9"
 	            	android:id="@+id/button9"/>
 	        <Button android:text="CE"
-	            	android:id="@+id/clean"/>"
+	            	android:id="@+id/clean"/>
 	        <Button android:text="0"
-	            	android:layout_columnSpan="2"
-	            	android:layout_gravity="fill_horizontal"
-	            	android:id="@+id/button0"/>"
+	            	android:id="@+id/button0"/>
+	         <Button android:text="."
+	             	android:id="@+id/point"/>
 	        
 	    </GridLayout>
 	    
