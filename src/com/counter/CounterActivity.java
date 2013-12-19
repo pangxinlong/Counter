@@ -40,22 +40,26 @@ public class CounterActivity extends Activity implements OnClickListener {
 	// 按钮事件
 	@Override
 	public void onClick(View v) {
-		if (v.getId()==R.id.result) {
-			// voluation(myarraylist);
+		if (v.getId() == R.id.result) {//判断等号
+			voluation(myarraylist);
 		} else {
-			String buttonString = (String) ((Button) v).getText();// 存放监听到的按键字符串
-			judgeInput(buttonString);
+			if (v.getId() == R.id.clean) {//判断清除键
+				clean();
+			} else {
+				String buttonString = (String) ((Button) v).getText();// 存放监听到的按键字符串
+				judgeInput(buttonString);
+			}
 		}
 		show();
 	}
 
-	public void show() {// 用来显示输入的内容
+	public void show() {// 用来在界面显示输入的内容
 		String resultStr = " ";
 		for (int i = 0; i < myarraylist.size(); i++) {
-			Log.e("!!!!!", (String) myarraylist.get(0));
 			resultStr += (String) myarraylist.get(i);
 		}
 		((TextView) findViewById(idList[17])).setText(resultStr);
+		resultStr = " ";
 	}
 
 	public boolean judgeCharOrNumber(char input) {// 用来判断输入的字符是不是符号
@@ -93,16 +97,71 @@ public class CounterActivity extends Activity implements OnClickListener {
 			}
 		} else {
 			myarraylist.add((String) (StringOperator));
+
 		}
 	}
-	/*
-	 * public void voluation(ArrayList<String> cacheList) {
-	 * 
-	 * }
-	 * 
-	 * public double count(double num1, double num2, String opreate) { switch
-	 * (opreate.charAt(0)) { case '+': num1 += num2; break; case '-': num1 -=
-	 * num2; break; case '*': num1 *= num2; break; case '/': num1 /= num2;
-	 * break; } return num1; }
-	 */
+
+	public void clean() {// 清空list（刷新）
+		myarraylist.clear();
+	}
+
+	public void voluation(ArrayList<String> stringList) {// 将list中的字符，存为一组数字或符号
+		String strNum1 = "";// 存放第一组数据string
+		String strNum2 = "";// 存放第二组数据string
+		char operate = ' ';// 存放符号
+		boolean times = true;// 存放第几次输入的符号
+		while (stringList.size() > 0) {
+			if (judgeCharOrNumber((stringList.get(0)).charAt(0))) {//判断是否是字符
+				if (times) {//判断是第几次输入的字符
+					if (stringList.get(0).equals(".")){//判断是否是“.”
+						strNum1 += stringList.get(0);
+					}
+					else{
+					operate = stringList.get(0).charAt(0);
+					times = false;
+					}
+				} else {
+					if (stringList.get(0).equals(".")){
+						strNum2 += stringList.get(0);
+					}else{
+					operate = stringList.get(0).charAt(0);
+					strNum1 = (countNum(strNum1, strNum2, operate));
+					strNum2 = "";
+					}
+				}
+				myarraylist.remove(0);
+			} else {
+				if (times) {
+					strNum1 += stringList.get(0);
+				} else {
+					strNum2 += stringList.get(0);
+				}
+				myarraylist.remove(0);
+			}
+		}
+		myarraylist.add(0, (countNum(strNum1, strNum2, operate)));
+	}
+
+	public String countNum(String num1, String num2, char opreate) {
+		double doubleNum1 = 0;// 将第一组数据转为double型
+		double doubleNum2 = 0;// 将第二组数据转为double型
+		doubleNum1 = Double.valueOf(num1);
+		doubleNum2 = Double.valueOf(num2);
+		switch (opreate) {
+		case '+':
+			doubleNum1 += doubleNum2;
+			break;
+		case '-':
+			doubleNum1 -= doubleNum2;
+			break;
+		case '*':
+			doubleNum1 *= doubleNum2;
+			break;
+		case '/':
+			doubleNum1 /= doubleNum2;
+			break;
+		}
+		return String.valueOf(doubleNum1);
+	}
+
 }
