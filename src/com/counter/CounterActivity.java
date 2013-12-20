@@ -40,17 +40,20 @@ public class CounterActivity extends Activity implements OnClickListener {
 	// 按钮事件
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.result) {//判断等号
-			voluation(myarraylist);
-		} else {
-			if (v.getId() == R.id.clean) {//判断清除键
-				clean();
+		if (v.getId() != R.id.textview) {
+			if (v.getId() == R.id.result) {// 判断等号
+				voluation(myarraylist);
 			} else {
-				String buttonString = (String) ((Button) v).getText();// 存放监听到的按键字符串
-				judgeInput(buttonString);
+				if (v.getId() == R.id.clean) {// 判断清除键
+					clean();
+				} else {
+					String buttonString = (String) ((Button) v).getText();// 存放监听到的按键字符串
+					judgeInput(buttonString);
+				}
 			}
+			show();
+		} else {
 		}
-		show();
 	}
 
 	public void show() {// 用来在界面显示输入的内容
@@ -109,32 +112,32 @@ public class CounterActivity extends Activity implements OnClickListener {
 		String strNum1 = "";// 存放第一组数据string
 		String strNum2 = "";// 存放第二组数据string
 		char operate = ' ';// 存放符号
-		boolean times = true;// 存放第几次输入的符号
+		boolean times = true;// 存放第几次输入的符号默认是第一次，true
+
 		while (stringList.size() > 0) {
-			if (judgeCharOrNumber((stringList.get(0)).charAt(0))) {//判断是否是字符
-				if (times) {//判断是第几次输入的字符
-					if (stringList.get(0).equals(".")){//判断是否是“.”
-						strNum1 += stringList.get(0);
-					}
-					else{
-					operate = stringList.get(0).charAt(0);
-					times = false;
+			if (judgeCharOrNumber((stringList.get(0)).charAt(0))) {// 判断第一个元素是否是字符
+				if (times) {// 判断是第几次输入的字符
+					if ((stringList.get(0)).equals(".")) {// 判断第一个元素是否是“.”
+						strNum1 += (stringList.get(0));
+					} else {
+						operate = (stringList.get(0)).charAt(0);
+						times = false;
 					}
 				} else {
-					if (stringList.get(0).equals(".")){
-						strNum2 += stringList.get(0);
-					}else{
-					operate = stringList.get(0).charAt(0);
-					strNum1 = (countNum(strNum1, strNum2, operate));
-					strNum2 = "";
+					if ((stringList.get(0)).equals(".")) {
+						strNum2 += (stringList.get(0));
+					} else {
+						strNum1 = (countNum(strNum1, strNum2, operate));
+						strNum2 = "";// 做完一次运算刷新strNum2
+						operate = (stringList.get(0)).charAt(0);
 					}
 				}
-				myarraylist.remove(0);
+				myarraylist.remove(0);// 移除第一个元素
 			} else {
 				if (times) {
-					strNum1 += stringList.get(0);
+					strNum1 += (stringList.get(0));
 				} else {
-					strNum2 += stringList.get(0);
+					strNum2 += (stringList.get(0));
 				}
 				myarraylist.remove(0);
 			}
@@ -142,7 +145,7 @@ public class CounterActivity extends Activity implements OnClickListener {
 		myarraylist.add(0, (countNum(strNum1, strNum2, operate)));
 	}
 
-	public String countNum(String num1, String num2, char opreate) {
+	public String countNum(String num1, String num2, char opreate) {// 对num1，num2做运算
 		double doubleNum1 = 0;// 将第一组数据转为double型
 		double doubleNum2 = 0;// 将第二组数据转为double型
 		doubleNum1 = Double.valueOf(num1);
@@ -163,5 +166,4 @@ public class CounterActivity extends Activity implements OnClickListener {
 		}
 		return String.valueOf(doubleNum1);
 	}
-
 }
