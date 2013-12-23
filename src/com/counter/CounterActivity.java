@@ -13,55 +13,44 @@ import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class CounterActivity extends Activity implements OnClickListener {
+public class CounterActivity extends Activity {
 	ArrayList myarraylist = new ArrayList<String>();
 	private static final int TYPE_OPERATOR = -1;// 符号
 	private static final int TYPE_EMPTY = 0;// 空
 	private static final int TYPE_NUMBER = 1;// 数字
-
-	// 初始化idList
-	int idList[] = { R.id.button0, R.id.button1, R.id.button2, R.id.button3,
-			R.id.button4, R.id.button5, R.id.button6, R.id.button7,
-			R.id.button8, R.id.button9, R.id.add, R.id.minus, R.id.times,
-			R.id.divided, R.id.point, R.id.result, R.id.clean, R.id.textview };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.counteractivity);
+	}
 
-		// 监听各各按钮
-		for (int i = 0; i < idList.length; i++) {
-			findViewById(idList[i]).setOnClickListener(this);
+	public void clickListen(View v) {
+		String textString = (String) ((Button) v).getText();
+		String tagString=((String) v.getTag());
+		if (tagString.startsWith("val")) {
+			myarraylist.add(textString);
+			show();
+		} else if (tagString.startsWith("opt")) {
+			judgeInput(textString);
+			show();
+		} else if (tagString.equals("result")) {
+			voluation(myarraylist);
+			show();
+		} else {
+			clean();
+			show();
 		}
 	}
 
 	// 按钮事件
-	@Override
-	public void onClick(View v) {
-		if (v.getId() != R.id.textview) {
-			if (v.getId() == R.id.result) {// 判断等号
-				voluation(myarraylist);
-			} else {
-				if (v.getId() == R.id.clean) {// 判断清除键
-					clean();
-				} else {
-					String buttonString = (String) ((Button) v).getText();// 存放监听到的按键字符串
-					judgeInput(buttonString);
-				}
-			}
-			show();
-		} else {
-		}
-	}
-
 	public void show() {// 用来在界面显示输入的内容
 		String resultStr = " ";
 		for (int i = 0; i < myarraylist.size(); i++) {
 			resultStr += (String) myarraylist.get(i);
 		}
-		((TextView) findViewById(idList[17])).setText(resultStr);
+		((TextView) findViewById(R.id.textview)).setText(resultStr);
 		resultStr = " ";
 	}
 
